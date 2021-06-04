@@ -1,0 +1,35 @@
+name: rabbitmq-support-tools
+base: core18
+version: '20210604'
+summary: Support tools for rabbitmq-server
+description: |
+  This package contains tools that are not yet ready to be included into RabbitMQ
+  distribution, cannot be a plugin or cannot ship with RabbitMQ for any other
+  reason:
+
+  rabbitmq-collect-env: collects RabbitMQ and selected OS logs, system-level
+    metrics and other environment information (iostat, kernel limits and similar)
+    that is not always directly related to RabbitMQ but can provide additional
+    insights about the overall state of the node
+
+  rebalance-queue-masters: given a RabbitMQ cluster with unevenly spread queue
+    masters, this script will rebalance queue masters evenly, across all RabbitMQ
+    nodes in the clustergreet usergreet usergreet user hithere greets the user,
+    or the world.
+
+grade: devel
+confinement: devmode
+
+apps:
+  rebalance-queue-masters:
+    command: scripts/rebalance-queue-masters
+
+parts:
+  support-tools:
+    plugin: dump
+    source: https://github.com/rabbitmq/support-tools.git
+    source-commit: 801a67e54da96d6e3dc083eb594a263c339ca06c
+    stage:
+      - scripts/apply-policy-to-all-vhosts
+      - scripts/rabbitmq-collect-env
+      - scripts/rebalance-queue-masters
