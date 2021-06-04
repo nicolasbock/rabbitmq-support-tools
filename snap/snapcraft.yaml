@@ -22,14 +22,14 @@ confinement: strict
 
 apps:
   rebalance-queue-masters:
-    command: scripts/rebalance-queue-masters
+    command: /bin/bash $SNAP/bin/rebalance-queue-masters
 
 parts:
   support-tools:
     plugin: dump
     source: https://github.com/rabbitmq/support-tools.git
     source-commit: 801a67e54da96d6e3dc083eb594a263c339ca06c
-    stage:
-      - scripts/apply-policy-to-all-vhosts
-      - scripts/rabbitmq-collect-env
-      - scripts/rebalance-queue-masters
+    organize:
+      scripts/apply-policy-to-all-vhosts: bin/
+      scripts/rabbitmq-collect-env: bin/
+      scripts/rebalance-queue-masters: bin/
