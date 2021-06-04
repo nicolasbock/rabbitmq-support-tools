@@ -18,7 +18,7 @@ description: |
     or the world.
 
 grade: devel
-confinement: devmode
+confinement: strict
 
 apps:
   rebalance-queue-masters:
