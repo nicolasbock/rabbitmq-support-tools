@@ -1,6 +1,6 @@
 name: rabbitmq-support-tools
 base: core18
-version: '20210604'
+version: '20210713'
 summary: Support tools for rabbitmq-server
 description: |
   This package contains tools that are not yet ready to be included into RabbitMQ
@@ -21,8 +21,10 @@ grade: devel
 confinement: strict
 
 apps:
+  rabbitmq-support:
+    command: bin/rabbitmq-support
   rebalance-queue-masters:
-    command: /bin/bash $SNAP/bin/rebalance-queue-masters
+    command: bin/rebalance-queue-masters
 
 parts:
   support-tools:
@@ -30,4 +32,5 @@ parts:
     source: https://github.com/nicolasbock/rabbitmq-support-tools.git
     source-commit: main
     organize:
-      scripts/rebalance-queue-masters: bin/
+      rebalance-queue-masters: bin/
+      rabbitmq-support: bin/
