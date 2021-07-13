@@ -3,9 +3,9 @@
 name: CI
 on:
   push:
-    branches: [ $default-branch ]
+    branches: main
   pull_request:
-    branches: [ $default-branch ]
+    branches: main
   workflow_dispatch:
 
 jobs:
@@ -13,5 +13,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: sudo snap install snapcraft
+      - name: Check out sources
+        uses: actions/checkout@v2
+      - name: Build snap
+        uses: snapcore/action-build@v1
+        id: snapcraft
+      - name: Store snap artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: snap
+          path: ${{ steps.snapcraft.outputs.snap }}
