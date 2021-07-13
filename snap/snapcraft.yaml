@@ -23,7 +23,7 @@ apps:
 parts:
   support-tools:
     plugin: dump
-    source: https://github.com/nicolasbock/rabbitmq-support-tools.git
+    source: .
     source-commit: main
     organize:
       rebalance-queue-masters: bin/
