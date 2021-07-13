@@ -25,6 +25,8 @@ parts:
     plugin: dump
     source: .
     source-commit: main
+    stage-packages:
+      - rabbitmq-server
     organize:
       rebalance-queue-masters: bin/
       rabbitmq-support: bin/
