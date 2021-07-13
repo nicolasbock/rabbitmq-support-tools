@@ -21,8 +21,6 @@ grade: devel
 confinement: strict
 
 apps:
-  rabbitmq-support:
-    command: /bin/bash $SNAP/bin/rabbitmq-support
   rebalance-queue-masters:
     command: /bin/bash $SNAP/bin/rebalance-queue-masters
 
@@ -32,12 +30,4 @@ parts:
     source: https://github.com/nicolasbock/rabbitmq-support-tools.git
     source-commit: main
     organize:
-      scripts/apply-policy-to-all-vhosts: bin/
-      scripts/rabbitmq-collect-env: bin/
       scripts/rebalance-queue-masters: bin/
-
-  main-wrapper:
-    plugin: dump
-    source: .
-    organize:
-      rabbitmq-support: bin/
