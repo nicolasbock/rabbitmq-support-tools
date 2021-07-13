@@ -4,4 +4,4 @@
 
 [![CI](https://github.com/nicolasbock/rabbitmq-support-tools-snap/actions/workflows/CI.yaml/badge.svg)](https://github.com/nicolasbock/rabbitmq-support-tools-snap/actions/workflows/CI.yaml)
 
-Snap of [nicolasbock/rabbitmq-support-tools](https://github.com/nicolasbock/rabbitmq-support-tools).
+Some tools to manage a RabbitMQ cluster.
