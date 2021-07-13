@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e -u -x
+
+basedir=$(readlink --canonicalize $(dirname $0))
+
+if [[ -v SNAP ]]; then
+  basedir=${SNAP}/bin
+fi
+
+${basedir}/rebalance-queue-masters
