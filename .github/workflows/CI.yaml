@@ -44,34 +44,16 @@ jobs:
             quilt
           pushd package
           sudo apt-get build-dep .
-      - name: Generate binary package
+      - name: Generate Debian package
         run: |
           set -e -u -x
 
           export DEBEMAIL=noreply@dev.null
           export DEBFULLNAME='CI Tester'
 
-          git archive \
-            --format tar.gz \
-            --output rabbitmq-support-tools_99999999.orig.tar.gz \
-            --prefix rabbitmq-support-tools-99999999/ \
-            HEAD
-
-          pushd package
-          dch \
-            --newversion 99999999 \
-            --distribution focal \
-            'CI test package'
-          popd
-
-          tar xf rabbitmq-support-tools_99999999.orig.tar.gz
-          rsync -av package/debian rabbitmq-support-tools-99999999/
-          pushd rabbitmq-support-tools-99999999
-          dpkg-buildpackage -us -uc -ui --build=source,any
+          ./package/build-package.sh
       - name: Store package artifact
         uses: actions/upload-artifact@v2
         with:
           name: deb
-          path: |
-            rabbitmq-support-tools_*_amd64.deb
-            rabbitmq-support-tools_*.dsc
+          path: rabbitmq-support-tools_*
