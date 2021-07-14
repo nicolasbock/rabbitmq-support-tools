@@ -1,6 +1,6 @@
 name: rabbitmq-support-tools
 base: core18
-version: '20210713'
+version: '1.0.0'
 summary: Support tools for rabbitmq-server
 description: |
   This package contains tools that might be helpful in managing a
