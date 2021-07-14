@@ -1,4 +1,4 @@
-rabbitmq-support-tools (20210713-1) impish; urgency=medium
+rabbitmq-support-tools (1.0.0-0ubuntu1) impish; urgency=medium
 
   * Initial release.
 
