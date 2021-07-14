@@ -70,5 +70,5 @@ jobs:
         with:
           name: deb
           path: |
-            rabbitmq-support-tools_*_amd64.{deb,dsc}
+            rabbitmq-support-tools_*_amd64.deb
             rabbitmq-support-tools_*.dsc
