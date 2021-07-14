@@ -1,0 +1,70 @@
+---
+
+name: Package
+on:
+  release:
+    branches: main
+  workflow_dispatch:
+
+jobs:
+
+  build-snap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out sources
+        uses: actions/checkout@v2
+      - name: Build snap
+        uses: snapcore/action-build@v1
+        id: snapcraft
+      - name: Store snap artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: snap
+          path: ${{ steps.snapcraft.outputs.snap }}
+
+  build-deb:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out sources
+        uses: actions/checkout@v2
+      - name: Install package requirements
+        run: |
+          set -e -u -x
+
+          sudo apt-get update
+          sudo apt-get  --yes install --no-install-recommends \
+            debmake \
+            devscripts \
+            fakeroot \
+            software-properties-common \
+            ubuntu-dev-tools \
+            quilt
+          pushd package
+          sudo apt-get build-dep .
+      - name: Generate binary package
+        env:
+          TAG: ${{ github.ref }}
+        run: |
+          set -e -u -x
+
+          export DEBEMAIL=noreply@dev.null
+          export DEBFULLNAME='CI Tester'
+          export DEB_VERSION=${TAG##*/v}
+
+          git archive \
+            --format tar.gz \
+            --output rabbitmq-support-tools_${DEB_VERSION}.orig.tar.gz \
+            --prefix rabbitmq-support-tools-${DEB_VERSION}/ \
+            HEAD
+
+          tar xf rabbitmq-support-tools_${DEB_VERSION}.orig.tar.gz
+          rsync -av package/debian rabbitmq-support-tools-${DEB_VERSION}/
+          pushd rabbitmq-support-tools-${DEB_VERSION}
+          dpkg-buildpackage --build=source,any -us -uc -ui
+      - name: Store package artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: deb
+          path: |
+            rabbitmq-support-tools_*_amd64.{deb,dsc}
+            rabbitmq-support-tools_*.dsc
