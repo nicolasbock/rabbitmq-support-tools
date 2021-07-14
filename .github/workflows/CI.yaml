@@ -67,9 +67,11 @@ jobs:
           tar xf rabbitmq-support-tools_99999999.orig.tar.gz
           rsync -av package/debian rabbitmq-support-tools-99999999/
           pushd rabbitmq-support-tools-99999999
-          dpkg-buildpackage -us -uc -ui
+          dpkg-buildpackage -us -uc -ui --build=source,any
       - name: Store package artifact
         uses: actions/upload-artifact@v2
         with:
           name: deb
-          path: rabbitmq-support-tools_99999999_amd64.deb
+          path: |
+            rabbitmq-support-tools_*_amd64.deb
+            rabbitmq-support-tools_*.dsc
