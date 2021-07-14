@@ -38,6 +38,7 @@ jobs:
             debmake \
             devscripts \
             fakeroot \
+            libdistro-info-perl \
             software-properties-common \
             ubuntu-dev-tools \
             quilt
