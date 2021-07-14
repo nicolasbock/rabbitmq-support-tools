@@ -49,26 +49,27 @@ jobs:
 
           export DEBEMAIL=noreply@dev.null
           export DEBFULLNAME='CI Tester'
+          export CI_VERSION=0
 
           git archive \
             --format tar.gz \
-            --output rabbitmq-support-tools_99999999.orig.tar.gz \
-            --prefix rabbitmq-support-tools-99999999/ \
+            --output rabbitmq-support-tools_${CI_VERSION}.orig.tar.gz \
+            --prefix rabbitmq-support-tools-${CI_VERSION}/ \
             HEAD
 
           pushd package
           dch \
-            --newversion 99999999 \
+            --newversion ${CI_VERSION} \
             --distribution focal \
             'CI test package'
           popd
 
-          tar xf rabbitmq-support-tools_99999999.orig.tar.gz
-          rsync -av package/debian rabbitmq-support-tools-99999999/
-          pushd rabbitmq-support-tools-99999999
+          tar xf rabbitmq-support-tools_${CI_VERSION}.orig.tar.gz
+          rsync -av package/debian rabbitmq-support-tools-${CI_VERSION}/
+          pushd rabbitmq-support-tools-${CI_VERSION}
           dpkg-buildpackage -us -uc -ui
       - name: Store package artifact
         uses: actions/upload-artifact@v2
         with:
           name: deb
-          path: rabbitmq-support-tools_99999999_amd64.deb
+          path: rabbitmq-support-tools_0_amd64.deb
