@@ -1,0 +1,2 @@
+rabbitmq-support usr/bin
+rebalance-queue-masters usr/bin

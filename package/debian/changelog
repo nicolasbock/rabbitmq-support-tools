@@ -1,0 +1,5 @@
+rabbitmq-support-tools (20210713-1) impish; urgency=medium
+
+  * Initial release.
+
+ -- Nicolas Bock <nicolas.bock@canonical.com>  Fri, 04 Jun 2021 15:16:20 +0000
