@@ -6,10 +6,10 @@ description: |
   This package contains tools that might be helpful in managing a
   RabbitMQ cluster.
 
-  rebalance-queue-masters: given a RabbitMQ cluster with unevenly spread queue
-    masters, this script will rebalance queue masters evenly, across all RabbitMQ
-    nodes in the clustergreet usergreet usergreet user hithere greets the user,
-    or the world.
+  rebalance-queue-masters: given a RabbitMQ cluster with unevenly
+    spread queue masters, this script will rebalance queue masters
+    evenly, across all RabbitMQ nodes in the clustergreet usergreet
+    usergreet user hithere greets the user, or the world.
 
 grade: devel
 confinement: strict
@@ -17,8 +17,6 @@ confinement: strict
 apps:
   rabbitmq-support:
     command: bin/rabbitmq-support
-  rebalance-queue-masters:
-    command: bin/rebalance-queue-masters
 
 parts:
   support-tools:
