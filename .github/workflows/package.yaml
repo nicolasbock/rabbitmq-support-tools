@@ -65,6 +65,10 @@ jobs:
           rsync -av package/debian rabbitmq-support-tools-${DEB_VERSION}/
           pushd rabbitmq-support-tools-${DEB_VERSION}
           dpkg-buildpackage --build=source,any -us -uc -ui
+      - name: Create release
+        run: echo "FIXME"
+      - name: Upload package as release asset
+        run: echo "FIXME"
       - name: Store package artifact
         uses: actions/upload-artifact@v2
         with:
