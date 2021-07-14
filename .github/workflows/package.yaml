@@ -3,7 +3,11 @@
 name: Package
 on:
   release:
+    types: [published]
     branches: main
+  push:
+    tags:
+      - 'v*'
   workflow_dispatch:
 
 jobs:
