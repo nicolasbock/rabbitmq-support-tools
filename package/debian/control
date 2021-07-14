@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 9)
 
 Package: rabbitmq-support-tools
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, rabbitmq-server
+Depends: rabbitmq-server, ${misc:Depends}, ${shlibs:Depends}
 Description: Support tools for rabbitmq-server
   .
   This package contains tools that are not yet ready to be included
