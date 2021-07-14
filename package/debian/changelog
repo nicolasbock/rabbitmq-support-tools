@@ -1,3 +1,9 @@
+rabbitmq-support-tools (1.0.2) focal; urgency=medium
+
+  * Version bump to v1.0.2
+
+ -- Nicolas Bock <nicolas.bock@canonical.com>  Wed, 14 Jul 2021 15:25:25 +0200
+
 rabbitmq-support-tools (1.0.0-0ubuntu1) impish; urgency=medium
 
   * Initial release.
