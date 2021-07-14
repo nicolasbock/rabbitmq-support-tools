@@ -1,0 +1,20 @@
+Source: rabbitmq-support-tools
+Maintainer: Nicolas Bock <nicolas.bock@canonical.com>
+Section: net
+Priority: optional
+Standards-Version: 20210713
+Build-Depends: debhelper (>= 9)
+
+Package: rabbitmq-support-tools
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, rabbitmq-server
+Description: Support tools for rabbitmq-server
+  .
+  This package contains tools that are not yet ready to be included
+  into RabbitMQ distribution, cannot be a plugin or cannot ship with
+  RabbitMQ for any other reason:
+  .
+  rebalance-queue-masters: given a RabbitMQ cluster with unevenly
+    spread queue masters, this script will rebalance queue masters
+    evenly, across all RabbitMQ nodes in the clustergreet usergreet
+    usergreet user hithere greets the user, or the world.
