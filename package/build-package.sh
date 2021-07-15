@@ -35,6 +35,7 @@ if [[  ${TAG} == v9999 ]]; then
     "CI testbuild"
 fi
 debuild -S -us -uc
+debuild -b -us -uc
 cd ..
 
 rm -rf ${PACKAGE}-${DEB_VERSION}
