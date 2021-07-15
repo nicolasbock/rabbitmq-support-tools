@@ -40,12 +40,13 @@ jobs:
             debmake \
             devscripts \
             fakeroot \
+            libdistro-info-perl \
             software-properties-common \
             ubuntu-dev-tools \
             quilt
           pushd package
           sudo apt-get build-dep .
-      - name: Generate binary package
+      - name: Generate Debian package
         env:
           TAG: ${{ github.ref }}
         run: |
@@ -55,16 +56,7 @@ jobs:
           export DEBFULLNAME='CI Tester'
           export DEB_VERSION=${TAG##*/v}
 
-          git archive \
-            --format tar.gz \
-            --output rabbitmq-support-tools_${DEB_VERSION}.orig.tar.gz \
-            --prefix rabbitmq-support-tools-${DEB_VERSION}/ \
-            HEAD
-
-          tar xf rabbitmq-support-tools_${DEB_VERSION}.orig.tar.gz
-          rsync -av package/debian rabbitmq-support-tools-${DEB_VERSION}/
-          pushd rabbitmq-support-tools-${DEB_VERSION}
-          dpkg-buildpackage --build=source,any -us -uc -ui
+          ./package/build-package.sh ${TAG}
       - name: Create release
         run: echo "FIXME"
       - name: Upload package as release asset
@@ -73,6 +65,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: deb
-          path: |
-            rabbitmq-support-tools_*_amd64.deb
-            rabbitmq-support-tools_*.dsc
+          path: rabbitmq-support-tools_*
