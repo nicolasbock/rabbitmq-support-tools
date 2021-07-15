@@ -54,9 +54,8 @@ jobs:
 
           export DEBEMAIL=noreply@dev.null
           export DEBFULLNAME='CI Tester'
-          export DEB_VERSION=${TAG##*/v}
 
-          ./package/build-package.sh ${TAG}
+          ./package/build-package.sh --release
       - name: Create release
         run: echo "FIXME"
       - name: Upload package as release asset
