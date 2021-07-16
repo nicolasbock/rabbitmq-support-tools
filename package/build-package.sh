@@ -1,19 +1,18 @@
 #!/bin/bash
 
+PS4="($LINENO)"
+
 set -e -u -x
 
 basedir=$(readlink --canonicalize $(dirname $0))
 
-TAG=v9999
-if (( $# != 0 )); then
-  TAG=$1
-  if ! git --no-pager show ${TAG}; then
-    echo "please enter valid tag"
-    exit 1
-  fi
+release=0
+DEB_VERSION=9999
+if (( $# != 0 )) && [[ $1 = --release ]]; then
+  release=1
+  DEB_VERSION=$(head -n 1 debian/changelog | sed -e 's/^.*(\(.*\)).*$/\1/')
 fi
 
-DEB_VERSION=${TAG#v}
 PACKAGE=rabbitmq-support-tools
 
 cd ${basedir}/..
@@ -28,7 +27,7 @@ tar xf ${PACKAGE}_${DEB_VERSION}.orig.tar.gz
 rsync -av ${basedir}/debian ${PACKAGE}-${DEB_VERSION}/
 
 cd ${PACKAGE}-${DEB_VERSION}
-if [[  ${TAG} == v9999 ]]; then
+if [[ ${release} == 0 ]]; then
   dch \
     --newversion ${DEB_VERSION} \
     --distribution $(lsb_release --codename | awk '{print $2}') \
